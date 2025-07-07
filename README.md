@@ -85,8 +85,8 @@ ssh -i "your-key.pem" ec2-user@<EC2-Public-IP>
 sudo yum install -y mysql
 
     Connect to the RDS instance:
+           sudo mysql -u root -p -h awseb-e-x7hdg5fd76-stack-awsebrdsdatabase-inbhy6m pogps.c7u882mc6jgt.ap-south-1.rds.amazonaws.com
 
-mysql -h <RDS-ENDPOINT> -u <DB-USERNAME> -p
 
 Step 4: Optional Enhancements
 
@@ -123,11 +123,11 @@ EC2 connection to RDS via MySQL client
 Commands Reference
 
 # SSH into EC2
-ssh -i "your-key.pem" ec2-user@<EC2-IP>
+ssh -i "project-key.pem" ec2-user@<EC2-IP>
 
 # Install MySQL client
 sudo yum install -y mysql
-
+mysql --version
 # Connect to RDS
 sudo mysql -u root -p -h awseb-e-x7hdg5fd76-stack-awsebrdsdatabase-inbhy6m pogps.c7u882mc6jgt.ap-south-1.rds.amazonaws.com
 
