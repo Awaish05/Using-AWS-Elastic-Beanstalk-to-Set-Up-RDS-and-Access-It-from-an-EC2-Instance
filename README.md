@@ -1,4 +1,4 @@
-# Project 1: Using AWS Elastic Beanstalk to Set Up RDS and Access It from an EC2 Instance
+ Project 1: Using AWS Elastic Beanstalk to Set Up RDS and Access It from an EC2 Instance
 
 ## Objective
 
@@ -8,24 +8,24 @@ This project demonstrates how to deploy a sample web application using AWS Elast
 
 ## Architecture Diagram
 
-         +----------------------------+
-         |  AWS Elastic Beanstalk     |
-         |  (Web App + RDS Option)    |
-         +-------------+--------------+
-                       |
-     +-----------------+-----------------+
-     |                                   |
-
-+--------v--------+ +--------v--------+
-| Web Application | | Amazon RDS |
-| (e.g., Flask) | | (MySQL/Postgres) |
-+-----------------+ +------------------+
-|
-+---------v---------+
-| EC2 Instance |
-| (DB Client Access) |
-+--------------------+
-
+```
+             +----------------------------+
+             |  AWS Elastic Beanstalk     |
+             |  (Web App + RDS Option)    |
+             +-------------+--------------+
+                           |
+         +-----------------+-----------------+
+         |                                   |
+ +--------v--------+                +--------v--------+
+ | Web Application |                |  Amazon RDS      |
+ |  (e.g., Flask)  |                | (MySQL/Postgres) |
+ +-----------------+                +------------------+
+                                           |
+                                 +---------v---------+
+                                 |    EC2 Instance    |
+                                 | (DB Client Access) |
+                                 +--------------------+
+```
 
 ---
 
@@ -78,69 +78,80 @@ This project demonstrates how to deploy a sample web application using AWS Elast
 
 ```bash
 ssh -i "your-key.pem" ec2-user@<EC2-Public-IP>
+```
 
-    Install a database client (MySQL/PostgreSQL):
+3. Install a database client (MySQL/PostgreSQL):
 
+```bash
 # For MySQL
 sudo yum install -y mysql
+```
 
-    Connect to the RDS instance:
-           sudo mysql -u root -p -h awseb-e-x7hdg5fd76-stack-awsebrdsdatabase-inbhy6m pogps.c7u882mc6jgt.ap-south-1.rds.amazonaws.com
+4. Connect to the RDS instance:
 
+```bash
+mysql -h <RDS-ENDPOINT> -u <DB-USERNAME> -p
+```
 
-Step 4: Optional Enhancements
+---
 
-    Secrets Management: Store DB credentials using AWS Systems Manager or Secrets Manager.
+### Step 4: Optional Enhancements
 
-    Monitoring: Enable metrics using Amazon CloudWatch.
+- **Secrets Management:** Store DB credentials using AWS Systems Manager or Secrets Manager.
+- **Monitoring:** Enable metrics using Amazon CloudWatch.
+- **Automation:** Add a test script to EC2 for reading/writing to the RDS database.
 
-    Automation: Add a test script to EC2 for reading/writing to the RDS database.
+---
 
-Security Considerations
+## Security Considerations
 
-    Never expose RDS to 0.0.0.0/0.
+- Never expose RDS to 0.0.0.0/0.
+- Use least-privilege IAM roles.
+- Store secrets securely (never hardcoded).
+- Restrict SSH access to EC2 from trusted IPs or use Session Manager.
+- Delete unused resources to prevent cost overruns.
 
-    Use least-privilege IAM roles.
+---
 
-    Store secrets securely (never hardcoded).
-
-    Restrict SSH access to EC2 from trusted IPs or use Session Manager.
-
-    Delete unused resources to prevent cost overruns.
-
-Example Outputs & Screenshots
+## Example Outputs & Screenshots
 
 📸 Add your deployment screenshots here:
 
-Elastic Beanstalk environment dashboard
+- [ ] Elastic Beanstalk environment dashboard  
+- [ ] RDS instance configuration  
+- [ ] EC2 connection to RDS via MySQL client  
+- [ ] Sample query output from EC2  
 
-RDS instance configuration
+---
 
-EC2 connection to RDS via MySQL client
+## Commands Reference
 
-    Sample query output from EC2
-
-Commands Reference
-
+```bash
 # SSH into EC2
 ssh -i "project-key.pem" ec2-user@<EC2-IP>
 
 # Install MySQL client
 sudo yum install -y mysql
-mysql --version
+
 # Connect to RDS
 sudo mysql -u root -p -h awseb-e-x7hdg5fd76-stack-awsebrdsdatabase-inbhy6m pogps.c7u882mc6jgt.ap-south-1.rds.amazonaws.com
 
-Submitted by
+```
 
-Name: Awaish Ansari
-Role: DevOps Engineer (Internship Project)
-Project: Cloud Deployment and Integration using AWS Services
-Notes
+---
 
-    All resources were deployed in the same AWS Region and VPC.
+## Submitted by
 
-    Security groups were carefully configured to limit access between tiers.
+**Name:** Awaish Ansari  
+**Role:** DevOps Engineer (Internship Project)  
+**Project:** Cloud Deployment and Integration using AWS Services  
 
-    Application and infrastructure tested and validated end-to-end.
+---
 
+## Notes
+
+- All resources were deployed in the same AWS Region and VPC.
+- Security groups were carefully configured to limit access between tiers.
+- Application and infrastructure tested and validated end-to-end.
+
+---
