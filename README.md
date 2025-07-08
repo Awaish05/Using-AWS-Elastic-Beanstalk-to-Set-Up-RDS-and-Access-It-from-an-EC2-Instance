@@ -77,7 +77,7 @@ This project demonstrates how to deploy a sample web application using AWS Elast
 2. SSH into the instance:
 
 ```bash
-ssh -i "your-key.pem" ec2-user@<EC2-Public-IP>
+ssh -i "project-key.pem" ec2-user@<EC2-Public-IP>
 ```
 
 3. Install a database client (MySQL/PostgreSQL):
@@ -90,7 +90,7 @@ sudo yum install -y mysql
 4. Connect to the RDS instance:
 
 ```bash
-mysql -h <RDS-ENDPOINT> -u <DB-USERNAME> -p
+sudo mysql -u root -h -p (endpoint)
 ```
 
 ---
